@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using QuantuMaze.GameObjects;
 using QuantuMaze.Movement;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,27 +13,30 @@ namespace QuantuMaze.Collision
 {
     internal class Hitbox
     {
-        private Texture2D texture;
-        private Rectangle rectangle;
-        private Color boxColor;
-        public Rectangle Rectangle { get { return rectangle; } set { value = rectangle; } }
-        public Texture2D Texture { get { return texture; } set { value = texture; } }
-        public Color BoxColor { get { return boxColor; } set { boxColor = value; } }
+        public Rectangle Rectangle { get; set; }
+        public Texture2D Texture { get; set; }
+        public Color BoxColor { get; set; }
+        public bool Collidable { get; set; }
 
-        public Hitbox(int width, int height,Color color,Vector2 position, Vector2 speed)
+        public Hitbox(Vector2 position, int width, int height,Color color)
         {
-            this.rectangle = new Rectangle((int)position.X,(int)position.Y,width,height);
-            boxColor = color;
+            Rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
+            BoxColor = color;
         }
         public void LoadContent(GraphicsDevice graphics)
         {
-            this.texture = new Texture2D(graphics, 1, 1);
-            this.texture.SetData(new[] { boxColor });
+            Texture = new Texture2D(graphics, 1, 1);
+            Texture.SetData(new[] { BoxColor });
 
         }
         public void Draw(SpriteBatch spriteBatch,Vector2 position)
         {
-            spriteBatch.Draw(texture,position,rectangle,boxColor);
+            spriteBatch.Draw(Texture,position,Rectangle,BoxColor);
+        }
+        public void Update(Vector2 newPosition)
+        {
+            Rectangle = new Rectangle((int)newPosition.X, (int)newPosition.Y, Rectangle.Width, Rectangle.Height);
+
         }
     }
 }

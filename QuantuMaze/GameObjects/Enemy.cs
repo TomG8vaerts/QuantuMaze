@@ -1,38 +1,41 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QuantuMaze.GameObjects;
+using QuantuMaze.Animate;
 using QuantuMaze.Collision;
+using QuantuMaze.Movement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using QuantuMaze.Movement;
-using QuantuMaze.Animate;
-using QuantuMaze.Input;
 
 namespace QuantuMaze.GameObjects
 {
-    internal class Player : IMovable
+    internal class Enemy : IMovable
     {
         private Texture2D texture;
         private Animation animation;
+        private Vector2 position;
+        private Vector2 speed;
         private MovementManager movementManager;
+        private Hitbox hitbox;
 
-        public Vector2 Position { get; set; }
-        public Vector2 Speed { get; set; }
-        public Hitbox Hitbox { get; set; }
-
-        public Player(Texture2D texture)
+        public Enemy(Texture2D texture)
         {
             this.texture = texture;
-            Position = new Vector2(20, 10);
-            this.Speed = new Vector2(3, 0);
-            Hitbox = new Hitbox(Position,20, 20,Color.Red); 
+            Position = new Vector2(300, 10);
+            Speed = new Vector2(1, 0);
             animation = new Animation();
-            animation.AddFrame(new AnimationFrame(new Rectangle((int)Position.X,(int)Position.Y, 18, 18)));
+            animation.AddFrame(new AnimationFrame(new Rectangle((int)position.X, (int)position.Y, 20, 20)));
             movementManager = new MovementManager();
+            Hitbox = new Hitbox(position,22, 22, Color.Black);
+            CollisionManager.AddCollisionBox(Hitbox);
         }
+
+        public Vector2 Position { get => position; set => position=value; }
+        public Vector2 Speed { get => speed; set => speed=value; }
+        public Hitbox Hitbox { get => hitbox; set => hitbox=value; }
+
         public void LoadContent(GraphicsDevice graphics)
         {
             Hitbox.LoadContent(graphics);
@@ -40,8 +43,8 @@ namespace QuantuMaze.GameObjects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Hitbox.Draw(spriteBatch,Position);
-            spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.Yellow);
+            Hitbox.Draw(spriteBatch, Position);
+            spriteBatch.Draw(texture, position, animation.CurrentFrame.SourceRectangle, Color.White);
         }
 
         public void Update(GameTime gameTime)
@@ -50,10 +53,10 @@ namespace QuantuMaze.GameObjects
             animation.Update(gameTime);
             Hitbox.Update(Position);
         }
+
         public void Move()
         {
             movementManager.Move(this,Position);
-            
         }
     }
 }

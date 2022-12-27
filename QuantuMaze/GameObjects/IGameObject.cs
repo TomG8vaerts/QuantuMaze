@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QuantuMaze.Collision;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace QuantuMaze.GameObjects
 {
     internal interface IGameObject
     {
+        public Hitbox Hitbox { get; set; }
         public void Update(GameTime gameTime);
         public void Draw(SpriteBatch spriteBatch);
     }
