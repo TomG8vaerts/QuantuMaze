@@ -13,15 +13,14 @@ namespace QuantuMaze.GameObjects.Blocks
     {
         public Hitbox Hitbox { get; set; }
         public Texture2D Texture { get; set; }
-        public bool Passable { get; set; }
         public Color Color { get; set; } = Color.Transparent;
-        
+        public bool Passable { get; set; }
+
 
         public Block(int x, int y, int width, int height)
         {
             
             Hitbox = new Hitbox(new Vector2(x, y), width, height, Color);
-            Passable = false;
             Hitbox.Collidable = true;
             CollisionManager.AddCollisionBox(Hitbox);
         }

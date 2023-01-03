@@ -22,6 +22,7 @@ namespace QuantuMaze.GameObjects
         public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
         public Hitbox Hitbox { get; set; }
+        public bool Jumped { get; set; }
 
         public Player(Texture2D texture)
         {
@@ -42,18 +43,28 @@ namespace QuantuMaze.GameObjects
         {
             Hitbox.Draw(spriteBatch,Position);
             spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.Yellow);
+            spriteBatch.Draw(texture,new Vector2(Position.X,Position.Y-80),animation.CurrentFrame.SourceRectangle, Color.Purple);
         }
-
         public void Update(GameTime gameTime)
         {
             Move();
             animation.Update(gameTime);
             Hitbox.Update(Position);
         }
-        public void Move()
+        public void Update(GameTime gameTime,Player player)
+        {
+            Move(player);
+            animation.Update(gameTime);
+            Hitbox.Update(Position);
+        }
+        public void Move(Player player=null)
         {
             movementManager.Move(this,Position);
-            
+        }
+
+        public void CollisionBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)
+        {
+            CollisionManager.PlayerBehavior(move,nextPos, lastPos);
         }
     }
 }

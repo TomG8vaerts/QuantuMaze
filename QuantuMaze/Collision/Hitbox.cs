@@ -30,7 +30,7 @@ namespace QuantuMaze.Collision
 
         }
         public void Draw(SpriteBatch spriteBatch,Vector2 position)
-        {
+        { 
             spriteBatch.Draw(Texture,position,Rectangle,BoxColor);
         }
         public void Update(Vector2 newPosition)

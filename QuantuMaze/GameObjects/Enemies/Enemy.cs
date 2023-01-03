@@ -9,16 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuantuMaze.GameObjects
+namespace QuantuMaze.GameObjects.Enemies
 {
-    internal class Enemy : IMovable
+    internal abstract class Enemy : IMovable
     {
         private Texture2D texture;
         private Animation animation;
-        private Vector2 position;
-        private Vector2 speed;
         private MovementManager movementManager;
-        private Hitbox hitbox;
 
         public Enemy(Texture2D texture)
         {
@@ -26,15 +23,16 @@ namespace QuantuMaze.GameObjects
             Position = new Vector2(300, 10);
             Speed = new Vector2(1, 0);
             animation = new Animation();
-            animation.AddFrame(new AnimationFrame(new Rectangle((int)position.X, (int)position.Y, 20, 20)));
+            animation.AddFrame(new AnimationFrame(new Rectangle((int)Position.X, (int)Position.Y, 20, 20)));
             movementManager = new MovementManager();
-            Hitbox = new Hitbox(position,22, 22, Color.Black);
+            Hitbox = new Hitbox(Position, 22, 22, Color.Black);
             CollisionManager.AddCollisionBox(Hitbox);
         }
 
-        public Vector2 Position { get => position; set => position=value; }
-        public Vector2 Speed { get => speed; set => speed=value; }
-        public Hitbox Hitbox { get => hitbox; set => hitbox=value; }
+        public Vector2 Position { get; set; }
+        public Vector2 Speed { get; set; }
+        public Hitbox Hitbox { get; set; }
+        public bool Jumped { get; set; }
 
         public void LoadContent(GraphicsDevice graphics)
         {
@@ -44,19 +42,29 @@ namespace QuantuMaze.GameObjects
         public void Draw(SpriteBatch spriteBatch)
         {
             Hitbox.Draw(spriteBatch, Position);
-            spriteBatch.Draw(texture, position, animation.CurrentFrame.SourceRectangle, Color.White);
+            spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White);
         }
-
         public void Update(GameTime gameTime)
         {
             Move();
             animation.Update(gameTime);
             Hitbox.Update(Position);
         }
-
-        public void Move()
+        public void Update(GameTime gameTime,Player player)
         {
-            movementManager.Move(this,Position);
+            Move(player);
+            animation.Update(gameTime);
+            Hitbox.Update(Position);
+        }
+        public void Move(Player player=null)
+        {
+            movementManager.Move(this, Position,player);
+        }
+
+        public void CollisionBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)
+        {
+            CollisionManager.EnemyBehavior(move, nextPos, lastPos);
+
         }
     }
 }
