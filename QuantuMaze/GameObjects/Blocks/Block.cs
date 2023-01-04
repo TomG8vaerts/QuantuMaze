@@ -22,7 +22,7 @@ namespace QuantuMaze.GameObjects.Blocks
             
             Hitbox = new Hitbox(new Vector2(x, y), width, height, Color);
             Hitbox.Collidable = true;
-            CollisionManager.AddCollisionBox(Hitbox);
+            //CollisionManager.AddCollisionBox(Hitbox);
         }
         public void LoadContent(GraphicsDevice graphics)
         {
@@ -31,7 +31,5 @@ namespace QuantuMaze.GameObjects.Blocks
             Texture.SetData(new[] { Color });
         }
         public abstract void Draw(SpriteBatch spriteBatch);
-
-        public abstract void Update(GameTime gameTime);
     }
 }

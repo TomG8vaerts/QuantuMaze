@@ -12,9 +12,5 @@ namespace QuantuMaze.GameObjects.Enemies
         public Chaser(Texture2D texture) : base(texture)
         {
         }
-        public void Teleport()
-        {
-
-        }
     }
 }

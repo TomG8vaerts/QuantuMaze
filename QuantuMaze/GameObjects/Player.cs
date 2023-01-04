@@ -27,7 +27,7 @@ namespace QuantuMaze.GameObjects
         public Player(Texture2D texture)
         {
             this.texture = texture;
-            Position = new Vector2(20, 10);
+            Position = new Vector2(10, 1010);
             this.Speed = new Vector2(3, 0);
             Hitbox = new Hitbox(Position,20, 20,Color.Red); 
             animation = new Animation();
@@ -43,6 +43,10 @@ namespace QuantuMaze.GameObjects
         {
             Hitbox.Draw(spriteBatch,Position);
             spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.Yellow);
+            if (this.Position.Y<120)
+            {
+                spriteBatch.Draw(texture, new Vector2(Position.X, Position.Y +1000), animation.CurrentFrame.SourceRectangle, Color.Purple);
+            }
             spriteBatch.Draw(texture,new Vector2(Position.X,Position.Y-80),animation.CurrentFrame.SourceRectangle, Color.Purple);
         }
         public void Update(GameTime gameTime)

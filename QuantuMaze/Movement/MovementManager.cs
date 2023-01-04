@@ -53,7 +53,7 @@ namespace QuantuMaze.Movement
             {
                 move.Jumped = true;
                 nextPos = nextPos - jumpForce - gravity;
-                if (move is Jumper && nextPos.Y < 0)
+                if ((move is Jumper ||move is Player)&& nextPos.Y < 0)
                 {
                     nextPos = new Vector2(lastPosition.X, h - move.Hitbox.Rectangle.Height - 10);
                 }

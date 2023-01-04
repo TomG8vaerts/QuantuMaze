@@ -22,6 +22,7 @@ namespace QuantuMaze.Collision
         {
             Rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
             BoxColor = color;
+            CollisionManager.AddCollisionBox(this);
         }
         public void LoadContent(GraphicsDevice graphics)
         {

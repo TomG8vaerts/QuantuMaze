@@ -22,10 +22,5 @@ namespace QuantuMaze.GameObjects.Blocks
         {
             spriteBatch.Draw(Texture, Hitbox.Rectangle,Hitbox.Rectangle, Color);
         }
-
-        public override void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

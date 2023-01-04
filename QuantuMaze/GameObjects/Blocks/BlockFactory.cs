@@ -12,15 +12,23 @@
             }
             if (type == 1)
             {
-                newBlock = new Tile(x, y);
+                newBlock = new Wall(x, y);
             }
             if (type == 2)
             {
-                newBlock = new Wall(x, y);
+                newBlock = new Tile(x, y);
             }
             if (type == 3)
             {
-
+                newBlock= new LeftWallTile(x, y);
+            }
+            if (type==4)
+            {
+                newBlock = new RightWallTile(x, y);
+            }
+            if (type==5)
+            {
+                newBlock = new DoubleWallTile(x, y);
             }
             return newBlock;
         }

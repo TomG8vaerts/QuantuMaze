@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace QuantuMaze.GameObjects.Enemies
 {
-    internal abstract class Enemy : IMovable
+    internal abstract class Enemy : IMovable,IAnimated
     {
         private Texture2D texture;
         private Animation animation;
@@ -20,13 +20,13 @@ namespace QuantuMaze.GameObjects.Enemies
         public Enemy(Texture2D texture)
         {
             this.texture = texture;
-            Position = new Vector2(300, 10);
+            Position = new Vector2(10, 10);
             Speed = new Vector2(1, 0);
             animation = new Animation();
             animation.AddFrame(new AnimationFrame(new Rectangle((int)Position.X, (int)Position.Y, 20, 20)));
             movementManager = new MovementManager();
             Hitbox = new Hitbox(Position, 22, 22, Color.Black);
-            CollisionManager.AddCollisionBox(Hitbox);
+            //CollisionManager.AddCollisionBox(Hitbox);
         }
 
         public Vector2 Position { get; set; }

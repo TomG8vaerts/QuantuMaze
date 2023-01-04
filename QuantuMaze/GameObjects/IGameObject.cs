@@ -12,7 +12,6 @@ namespace QuantuMaze.GameObjects
     internal interface IGameObject
     {
         public Hitbox Hitbox { get; set; }
-        public void Update(GameTime gameTime);
         public void Draw(SpriteBatch spriteBatch);
     }
 }
