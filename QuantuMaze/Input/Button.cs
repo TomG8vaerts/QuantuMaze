@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuantuMaze.Controls
+namespace QuantuMaze.Input
 {
     internal class Button : Component
     {
@@ -37,13 +37,13 @@ namespace QuantuMaze.Controls
         public override void Draw(SpriteBatch spriteBatch)
         {
             var color = Color.White;
-            if(isHovering)color = Color.Gray;
+            if (isHovering) color = Color.Gray;
             spriteBatch.Draw(texture, Rectangle, color);
             //if (!string.IsNullOrEmpty(Text))
             //{
-                //var x=(Rectangle.X+(Rectangle.Width/2))-(font.MeasureString(Text).X/2);
-                //var y=(Rectangle.Y+(Rectangle.Height/2))-(font.MeasureString(Text).Y/2);
-                //spriteBatch.DrawString(font, Text, new Vector2(x, y), PenColor);
+            //var x=(Rectangle.X+(Rectangle.Width/2))-(font.MeasureString(Text).X/2);
+            //var y=(Rectangle.Y+(Rectangle.Height/2))-(font.MeasureString(Text).Y/2);
+            //spriteBatch.DrawString(font, Text, new Vector2(x, y), PenColor);
             //}
         }
 
@@ -51,7 +51,7 @@ namespace QuantuMaze.Controls
         {
             lastMouseState = mouseState;
             mouseState = Mouse.GetState();
-            var mouseRectangle = new Rectangle(mouseState.X, mouseState.Y, 1,1);
+            var mouseRectangle = new Rectangle(mouseState.X, mouseState.Y, 1, 1);
             isHovering = false;
             if (mouseRectangle.Intersects(Rectangle))
             {

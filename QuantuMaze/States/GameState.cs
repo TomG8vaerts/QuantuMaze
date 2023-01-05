@@ -24,17 +24,15 @@ namespace QuantuMaze.States
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
         {
             Level1 = new Level1();
-            playerTexture = new Texture2D(graphics, 1, 1);
-            playerTexture.SetData(new[] { Color.Yellow });
+            playerTexture = content.Load<Texture2D>("Player/Walking/Robot");
             enemyTexture = new Texture2D(graphics, 1, 1);
             enemyTexture.SetData(new[] { Color.Blue });
             player = new Player(playerTexture);
-            enemy = new Chaser(enemyTexture);
-            backgroundTexture = content.Load<Texture2D>("Background/Game");//staat in folder als 05.png door probleem met content.mgcb
+            enemy = new Jumper(enemyTexture,player);
+            backgroundTexture = content.Load<Texture2D>("Background/Game");
             
             //onnodig
             Level1.LoadContent(graphics);
-            player.LoadContent(graphics);
             enemy.LoadContent(graphics);
         }
         public override void Draw(SpriteBatch spriteBatch)
@@ -49,7 +47,7 @@ namespace QuantuMaze.States
 
         public override void Update(GameTime gameTime)
         {
-            enemy.Update(gameTime, player);
+            enemy.Update(gameTime);
             player.Update(gameTime);
         }
     }

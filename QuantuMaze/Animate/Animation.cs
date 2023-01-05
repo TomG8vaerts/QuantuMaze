@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuantuMaze.Animate
 {
-    internal class Animation:IAnimated
+    internal class Animation
     {
         public AnimationFrame CurrentFrame { get; set; }
         private List<AnimationFrame> frames;

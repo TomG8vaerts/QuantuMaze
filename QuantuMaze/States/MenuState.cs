@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using QuantuMaze.Controls;
+using QuantuMaze.Input;
 using QuantuMaze.GameObjects;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace QuantuMaze.States
         public MenuState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
         {
 
-            backgroundTexture = content.Load<Texture2D>("BackGround/Menu");//staat in folder als 01.png door probleem met content.mgcb
+            backgroundTexture = content.Load<Texture2D>("BackGround/Menu");
             var startButtonTexture = content.Load<Texture2D>("Controls/StartButton");
             var exitButtonTexture = content.Load<Texture2D>("Controls/ExitButton");
             titleTexture = content.Load<Texture2D>("Title/Title");
@@ -41,7 +41,7 @@ namespace QuantuMaze.States
         }
         private void StartGameButton_Click(object sender, EventArgs e)
         {
-            game.StateManager.ChangeState(new GameState(game, graphics, content));
+            game.ChangeState(new GameState(game, graphics, content));
         }
         private void QuitGameButton_Click(object sender, EventArgs e)
         {

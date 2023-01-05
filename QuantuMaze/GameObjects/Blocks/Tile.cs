@@ -11,7 +11,7 @@ namespace QuantuMaze.GameObjects.Blocks
 {
     internal class Tile : Block
     {
-        public Tile(int x, int y): base(x, y, 40,5)
+        public Tile(int x, int y): base(x, y, 80,10)
         {
             Color = Color.GreenYellow;
             Passable = false;

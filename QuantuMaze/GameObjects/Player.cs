@@ -13,7 +13,7 @@ using QuantuMaze.Input;
 
 namespace QuantuMaze.GameObjects
 {
-    internal class Player : IMovable
+    internal class Player : IMovable,IPlayerInfo
     {
         private Texture2D texture;
         private Animation animation;
@@ -23,15 +23,21 @@ namespace QuantuMaze.GameObjects
         public Vector2 Speed { get; set; }
         public Hitbox Hitbox { get; set; }
         public bool Jumped { get; set; }
+        public int Health { get; set; }
 
         public Player(Texture2D texture)
         {
             this.texture = texture;
-            Position = new Vector2(10, 1010);
-            this.Speed = new Vector2(3, 0);
-            Hitbox = new Hitbox(Position,20, 20,Color.Red); 
+            Hitbox = new Hitbox(Position,23, 32,Color.Red,6);
+            Position = new Vector2(10, 990);
+            Speed = new Vector2(3, 0);
             animation = new Animation();
-            animation.AddFrame(new AnimationFrame(new Rectangle((int)Position.X,(int)Position.Y, 18, 18)));
+            animation.AddFrame(new AnimationFrame(new Rectangle(0,0,32,32)));
+            animation.AddFrame(new AnimationFrame(new Rectangle(32, 0, 32, 32)));
+            animation.AddFrame(new AnimationFrame(new Rectangle(64, 0, 32, 32)));
+            animation.AddFrame(new AnimationFrame(new Rectangle(0, 32, 32, 32)));
+            animation.AddFrame(new AnimationFrame(new Rectangle(32, 32, 32, 32)));
+            animation.AddFrame(new AnimationFrame(new Rectangle(64, 32, 32, 32)));
             movementManager = new MovementManager();
         }
         public void LoadContent(GraphicsDevice graphics)
@@ -41,27 +47,21 @@ namespace QuantuMaze.GameObjects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Hitbox.Draw(spriteBatch,Position);
-            spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.Yellow);
-            if (this.Position.Y<120)
+            //Hitbox.Draw(spriteBatch,Position);
+            spriteBatch.Draw(texture, Position-Hitbox.Offset, animation.CurrentFrame.SourceRectangle, Color.Yellow);
+            if (this.Position.Y<200)
             {
-                spriteBatch.Draw(texture, new Vector2(Position.X, Position.Y +1000), animation.CurrentFrame.SourceRectangle, Color.Purple);
+                spriteBatch.Draw(texture, new Vector2(Position.X, Position.Y +870) - Hitbox.Offset, animation.CurrentFrame.SourceRectangle, Color.Purple);
             }
-            spriteBatch.Draw(texture,new Vector2(Position.X,Position.Y-80),animation.CurrentFrame.SourceRectangle, Color.Purple);
+            spriteBatch.Draw(texture,new Vector2(Position.X,Position.Y-160) - Hitbox.Offset, animation.CurrentFrame.SourceRectangle, Color.Purple);
         }
         public void Update(GameTime gameTime)
         {
+            Hitbox.Update(Position);
+            animation.Update(gameTime);
             Move();
-            animation.Update(gameTime);
-            Hitbox.Update(Position);
         }
-        public void Update(GameTime gameTime,Player player)
-        {
-            Move(player);
-            animation.Update(gameTime);
-            Hitbox.Update(Position);
-        }
-        public void Move(Player player=null)
+        public void Move()
         {
             movementManager.Move(this,Position);
         }
@@ -69,6 +69,11 @@ namespace QuantuMaze.GameObjects
         public void CollisionBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)
         {
             CollisionManager.PlayerBehavior(move,nextPos, lastPos);
+        }
+
+        public void TakeDamage()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -11,8 +11,8 @@ namespace QuantuMaze.GameObjects.Blocks
         public DoubleWallTile(int x, int y) : base(x, y)
         {
             Color = Color.Magenta;
-            RightWallHitbox = new Hitbox(new Vector2(x + 35, y), 5, 40, Color);
-            LeftWallHitbox = new Hitbox(new Vector2(x, y), 5, 40, Color);
+            RightWallHitbox = new Hitbox(new Vector2(x + 70, y), 10, 80, Color);
+            LeftWallHitbox = new Hitbox(new Vector2(x, y), 10, 80, Color);
             RightWallHitbox.Collidable = true;
             LeftWallHitbox.Collidable = true;
             //CollisionManager.AddCollisionBox(LeftWallHitbox);

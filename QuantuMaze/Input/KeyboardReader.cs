@@ -11,6 +11,7 @@ namespace QuantuMaze.Input
     internal class KeyboardReader : IInputReader
     {
         bool jumped = false;
+        bool respawned = false;
         public Vector2 ReadInput()
         {
             KeyboardState state = Keyboard.GetState();
@@ -32,7 +33,16 @@ namespace QuantuMaze.Input
             {
                 jumped = false;
             }
-            
+            if (state.IsKeyDown(Keys.R) && jumped == false)
+            {
+                respawned = true;
+                direction.Y += 1;
+            }
+            if (!state.IsKeyDown(Keys.R) && jumped == true)
+            {
+                respawned = false;
+            }
+
             return direction;
         }
     }

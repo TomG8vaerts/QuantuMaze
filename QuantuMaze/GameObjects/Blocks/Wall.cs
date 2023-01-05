@@ -11,7 +11,7 @@ namespace QuantuMaze.GameObjects.Blocks
 {
     internal class Wall : Block
     {
-        public Wall(int x,int y) : base(x,y,5,40)
+        public Wall(int x,int y) : base(x,y,10,80)
         {
             Color = Color.Goldenrod;
             Passable = false;

@@ -1,13 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QuantuMaze.GameObjects;
-using QuantuMaze.Movement;
-using SharpDX.Direct3D9;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuantuMaze.Collision
 {
@@ -17,9 +9,11 @@ namespace QuantuMaze.Collision
         public Texture2D Texture { get; set; }
         public Color BoxColor { get; set; }
         public bool Collidable { get; set; }
+        public Vector2 Offset { get; set; }
 
-        public Hitbox(Vector2 position, int width, int height,Color color)
+        public Hitbox(Vector2 position, int width, int height, Color color, int offsetX = 0, int offsetY = 0)
         {
+            Offset = new Vector2(offsetX, offsetY);
             Rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
             BoxColor = color;
             CollisionManager.AddCollisionBox(this);
@@ -30,9 +24,9 @@ namespace QuantuMaze.Collision
             Texture.SetData(new[] { BoxColor });
 
         }
-        public void Draw(SpriteBatch spriteBatch,Vector2 position)
-        { 
-            spriteBatch.Draw(Texture,position,Rectangle,BoxColor);
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        {
+            spriteBatch.Draw(Texture, new Vector2((int)position.X, (int)position.Y), Rectangle, BoxColor);
         }
         public void Update(Vector2 newPosition)
         {

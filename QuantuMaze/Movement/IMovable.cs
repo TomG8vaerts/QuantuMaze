@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace QuantuMaze.Movement
 {
-    internal interface IMovable:IAnimated,IGameObject
+    internal interface IMovable:IGameObject
     {
         public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
         public bool Jumped { get; set; }
-        public void Move(Player player);
+        public void Move();
         public void CollisionBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos);
     }
 }

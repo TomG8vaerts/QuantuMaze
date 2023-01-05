@@ -9,7 +9,7 @@ namespace QuantuMaze.GameObjects.Enemies
 {
     internal class Chaser : Enemy
     {
-        public Chaser(Texture2D texture) : base(texture)
+        public Chaser(Texture2D texture,Player player) : base(texture,player)
         {
         }
     }

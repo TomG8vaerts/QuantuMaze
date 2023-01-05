@@ -16,7 +16,7 @@ namespace QuantuMaze.GameObjects.Blocks
         public LeftWallTile(int x, int y) : base(x, y)
         {
             Color = Color.Aquamarine;
-            WallHitbox = new Hitbox(new Vector2(x, y),5, 40,Color);
+            WallHitbox = new Hitbox(new Vector2(x, y),10, 80,Color);
             WallHitbox.Collidable = true;
             //CollisionManager.AddCollisionBox(WallHitbox);
         }

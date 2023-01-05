@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using QuantuMaze.GameObjects;
 using QuantuMaze.GameObjects.Enemies;
 using QuantuMaze.Movement;
 using System.Collections.Generic;
@@ -8,10 +9,14 @@ namespace QuantuMaze.Collision
     internal static class CollisionManager
     {
         static List<Hitbox> collisionBoxes = new List<Hitbox>();
-
+        static List<Hitbox> enemyHitboxes = new List<Hitbox>();
         public static void AddCollisionBox(Hitbox box)
         {
             collisionBoxes.Add(box);
+        }
+        public static void AddEnemyHitbox(Hitbox box)
+        {
+            enemyHitboxes.Add(box);
         }
         public static bool CheckCollisions(Rectangle rectangle, Vector2 position)
         {
@@ -29,7 +34,6 @@ namespace QuantuMaze.Collision
         }
         private static void StandardBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)
         {
-
             if (!CheckCollisions(move.Hitbox.Rectangle, nextPos))
             {
                 move.Position = nextPos;
@@ -51,7 +55,15 @@ namespace QuantuMaze.Collision
         {
             StandardBehavior(move, nextPos, lastPos);
             GroundCheck(move, lastPos);
+        }
 
+        private static bool CheckPlayerCollision(IMovable move,IPlayerInfo player)
+        {
+            foreach (Hitbox box in enemyHitboxes)
+            {
+                if (player.Hitbox.Rectangle.Intersects(box.Rectangle)) return true;
+            }
+            return false;
         }
 
         private static void GroundCheck(IMovable move, Vector2 lastPos)
@@ -62,7 +74,7 @@ namespace QuantuMaze.Collision
             }
         }
 
-        public static void EnemyBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)
+        public static void EnemyBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos,IPlayerInfo player)
         {
             StandardBehavior(move, nextPos, lastPos);
             GroundCheck(move, lastPos);
@@ -72,6 +84,10 @@ namespace QuantuMaze.Collision
                 {
                     move.Speed *= -1;
                 }
+            }
+            if (CheckPlayerCollision(move,player))
+            {
+                player.TakeDamage();
             }
         }
     }
