@@ -33,12 +33,12 @@ namespace QuantuMaze.Input
             {
                 jumped = false;
             }
-            if (state.IsKeyDown(Keys.R) && jumped == false)
+            if (state.IsKeyDown(Keys.R) && respawned == false)
             {
                 respawned = true;
                 direction.Y += 1;
             }
-            if (!state.IsKeyDown(Keys.R) && jumped == true)
+            if (!state.IsKeyDown(Keys.R) && respawned == true)
             {
                 respawned = false;
             }

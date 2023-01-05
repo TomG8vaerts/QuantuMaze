@@ -23,7 +23,10 @@ namespace QuantuMaze.Animate
             frames.Add(frame);
             CurrentFrame = frames[0];
         }
-
+        public AnimationFrame FindFrame(int frameNumber)
+        {
+            return frames[frameNumber];
+        }
         public void Update(GameTime gameTime)
         {
             CurrentFrame = frames[counter];

@@ -22,17 +22,17 @@ namespace QuantuMaze.GameObjects.Enemies
             this.texture = texture;
             Position = new Vector2(90, 10);
             Speed = new Vector2(1, 0);
-            animation = new Animation();
-            animation.AddFrame(new AnimationFrame(new Rectangle((int)Position.X, (int)Position.Y, 20, 20)));
-            movementManager = new MovementManager();
-            Hitbox = new Hitbox(Position, 22, 22, Color.Black);
+            Hitbox = new Hitbox(Position, 28, 40);
             CollisionManager.AddEnemyHitbox(Hitbox);
-            Player=player;
-        }
+            animation = new Animation();
+            animation.AddFrame(new AnimationFrame(new Rectangle(0, 38, 14, 20)));
+            animation.AddFrame(new AnimationFrame(new Rectangle(23, 39, 14, 20)));
+            animation.AddFrame(new AnimationFrame(new Rectangle(44, 39, 14, 20)));
+            animation.AddFrame(new AnimationFrame(new Rectangle(23, 39, 14, 20)));
 
-        protected Enemy(Texture2D texture)
-        {
-            this.texture = texture;
+
+            movementManager = new MovementManager();
+            Player=player;
         }
 
         public Vector2 Position { get; set; }
@@ -41,15 +41,15 @@ namespace QuantuMaze.GameObjects.Enemies
         public bool Jumped { get; set; }
         public IPlayerInfo Player { get; set; }
 
-        public void LoadContent(GraphicsDevice graphics)
-        {
-            Hitbox.LoadContent(graphics);
-        }
+        //public void LoadContent(GraphicsDevice graphics)
+        //{
+        //    Hitbox.LoadContent(graphics);
+        //}
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Hitbox.Draw(spriteBatch, Position);
-            spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White);
+            //Hitbox.Draw(spriteBatch, Position);
+            spriteBatch.Draw(texture, new Rectangle((int)Position.X,(int)Position.Y,28,40), animation.CurrentFrame.SourceRectangle, Color.White);
         }
         public void Update(GameTime gameTime)
         {

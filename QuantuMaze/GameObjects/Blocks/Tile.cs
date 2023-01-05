@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QuantuMaze.Animate;
 using QuantuMaze.Levels;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,12 @@ namespace QuantuMaze.GameObjects.Blocks
     {
         public Tile(int x, int y): base(x, y, 80,10)
         {
-            Color = Color.GreenYellow;
             Passable = false;
             Hitbox.Collidable = true;
-
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Hitbox.Rectangle,Hitbox.Rectangle, Color);
+            spriteBatch.Draw(tileTexture, Hitbox.Rectangle,animation.CurrentFrame.SourceRectangle, Color.White);
         }
     }
 }

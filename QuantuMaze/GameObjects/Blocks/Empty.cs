@@ -18,7 +18,7 @@ namespace QuantuMaze.GameObjects.Blocks
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Hitbox.Rectangle, Hitbox.Rectangle, Color.Transparent);
+            spriteBatch.Draw(tileTexture, Hitbox.Rectangle, Hitbox.Rectangle, Color.Transparent);
         }
     }
 }

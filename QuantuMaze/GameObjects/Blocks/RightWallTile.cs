@@ -14,16 +14,14 @@ namespace QuantuMaze.GameObjects.Blocks
         public Hitbox WallHitbox { get; set; }
         public RightWallTile(int x, int y) : base(x, y)
         {
-            Color = Color.CornflowerBlue;
-            WallHitbox = new Hitbox(new Vector2(x+70, y), 10, 80, Color);
+            WallHitbox = new Hitbox(new Vector2(x+70, y), 10, 80);
             WallHitbox.Collidable = true;
-            //CollisionManager.AddCollisionBox(WallHitbox);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Hitbox.Rectangle, Hitbox.Rectangle, Color);
-            spriteBatch.Draw(Texture, WallHitbox.Rectangle, WallHitbox.Rectangle, Color);
+            spriteBatch.Draw(tileTexture, Hitbox.Rectangle, animation.FindFrame(0).SourceRectangle, Color.White);
+            spriteBatch.Draw(wallTexture, WallHitbox.Rectangle, animation.FindFrame(1).SourceRectangle, Color.White);
         }
     }
 }

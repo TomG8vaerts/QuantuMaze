@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using QuantuMaze.Movement;
 using QuantuMaze.Animate;
 using QuantuMaze.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace QuantuMaze.GameObjects
 {
@@ -28,7 +29,7 @@ namespace QuantuMaze.GameObjects
         public Player(Texture2D texture)
         {
             this.texture = texture;
-            Hitbox = new Hitbox(Position,23, 32,Color.Red,6);
+            Hitbox = new Hitbox(Position,23, 32,6);
             Position = new Vector2(10, 990);
             Speed = new Vector2(3, 0);
             animation = new Animation();
@@ -40,14 +41,8 @@ namespace QuantuMaze.GameObjects
             animation.AddFrame(new AnimationFrame(new Rectangle(64, 32, 32, 32)));
             movementManager = new MovementManager();
         }
-        public void LoadContent(GraphicsDevice graphics)
-        {
-            Hitbox.LoadContent(graphics);
-        }
-
         public void Draw(SpriteBatch spriteBatch)
         {
-            //Hitbox.Draw(spriteBatch,Position);
             spriteBatch.Draw(texture, Position-Hitbox.Offset, animation.CurrentFrame.SourceRectangle, Color.Yellow);
             if (this.Position.Y<200)
             {

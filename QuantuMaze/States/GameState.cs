@@ -15,40 +15,25 @@ namespace QuantuMaze.States
 {
     internal class GameState : State
     {
-        private Player player;
-        private Texture2D playerTexture;
-        private Enemy enemy;
-        private Texture2D enemyTexture;
-        private Level1 Level1;
+        private LevelManager levelManager;
         private Texture2D backgroundTexture;
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
         {
-            Level1 = new Level1();
-            playerTexture = content.Load<Texture2D>("Player/Walking/Robot");
-            enemyTexture = new Texture2D(graphics, 1, 1);
-            enemyTexture.SetData(new[] { Color.Blue });
-            player = new Player(playerTexture);
-            enemy = new Jumper(enemyTexture,player);
-            backgroundTexture = content.Load<Texture2D>("Background/Game");
-            
-            //onnodig
-            Level1.LoadContent(graphics);
-            enemy.LoadContent(graphics);
+            backgroundTexture = content.Load<Texture2D>("BackGround/Game");
+            levelManager = new LevelManager(content);
+
         }
         public override void Draw(SpriteBatch spriteBatch)
-        { 
+        {
             spriteBatch.Begin();
             spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
-            Level1.Draw(spriteBatch);
-            player.Draw(spriteBatch);
-            enemy.Draw(spriteBatch);
+            levelManager.Draw(spriteBatch);
             spriteBatch.End();
         }
 
         public override void Update(GameTime gameTime)
         {
-            enemy.Update(gameTime);
-            player.Update(gameTime);
+            levelManager.Update(gameTime);
         }
     }
 }

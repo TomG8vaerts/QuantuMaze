@@ -16,14 +16,11 @@ namespace QuantuMaze.States
         private List<Component> components;
         private Texture2D backgroundTexture;
         private Texture2D titleTexture;
+        private Texture2D startButtonTexture;
+        private Texture2D exitButtonTexture;
         public MenuState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
         {
-
-            backgroundTexture = content.Load<Texture2D>("BackGround/Menu");
-            var startButtonTexture = content.Load<Texture2D>("Controls/StartButton");
-            var exitButtonTexture = content.Load<Texture2D>("Controls/ExitButton");
-            titleTexture = content.Load<Texture2D>("Title/Title");
-            var buttonFont = content.Load<SpriteFont>("Fonts/File");
+            LoadContent(content);
             var startGameButton = new Button(startButtonTexture)
             {
                 Position = new Vector2(590, 270)
@@ -39,6 +36,15 @@ namespace QuantuMaze.States
                 startGameButton,quitGameButton
             };
         }
+
+        private void LoadContent(ContentManager content)
+        {
+            backgroundTexture = content.Load<Texture2D>("BackGround/Menu");
+            startButtonTexture = content.Load<Texture2D>("Controls/StartButton");
+            exitButtonTexture = content.Load<Texture2D>("Controls/ExitButton");
+            titleTexture = content.Load<Texture2D>("Title/Title");
+        }
+
         private void StartGameButton_Click(object sender, EventArgs e)
         {
             game.ChangeState(new GameState(game, graphics, content));
