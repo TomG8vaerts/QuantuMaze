@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace QuantuMaze.GameObjects.Enemies
     internal class Jumper : Enemy
     {
 
-        public Jumper(Texture2D texture,Player player) : base(texture,player)
+        public Jumper( Texture2D texture,Player player) : base(texture,player)
         {
         }
     }

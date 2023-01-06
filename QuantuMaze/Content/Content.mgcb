@@ -37,6 +37,18 @@
 /processorParam:TextureFormat=Color
 /build:BackGround/Menu.png
 
+#begin Collectible/Orb2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Collectible/Orb2.png
+
 #begin Controls/ExitButton.png
 /importer:TextureImporter
 /processor:TextureProcessor

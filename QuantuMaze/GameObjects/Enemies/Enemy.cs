@@ -14,13 +14,12 @@ namespace QuantuMaze.GameObjects.Enemies
     internal abstract class Enemy : IMovable
     {
         private Texture2D texture;
-        private Animation animation;
+        protected Animation animation;
         private MovementManager movementManager;
 
         public Enemy(Texture2D texture,Player player)
         {
             this.texture = texture;
-            Position = new Vector2(90, 10);
             Speed = new Vector2(1, 0);
             Hitbox = new Hitbox(Position, 28, 40);
             CollisionManager.AddEnemyHitbox(Hitbox);
@@ -40,16 +39,22 @@ namespace QuantuMaze.GameObjects.Enemies
         public Hitbox Hitbox { get; set; }
         public bool Jumped { get; set; }
         public IPlayerInfo Player { get; set; }
-
-        //public void LoadContent(GraphicsDevice graphics)
-        //{
-        //    Hitbox.LoadContent(graphics);
-        //}
+        public bool IsFacingLeft { get; set; }
+        public bool IsMoving { get; set; } = true;
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //Hitbox.Draw(spriteBatch, Position);
-            spriteBatch.Draw(texture, new Rectangle((int)Position.X,(int)Position.Y,28,40), animation.CurrentFrame.SourceRectangle, Color.White);
+            if (IsFacingLeft)
+            {
+                if(IsMoving) spriteBatch.Draw(texture, new Rectangle((int)Position.X, (int)Position.Y, 28, 40), animation.CurrentFrame.SourceRectangle, Color.White,0,Vector2.Zero,SpriteEffects.FlipHorizontally,0);
+                else spriteBatch.Draw(texture, new Rectangle((int)Position.X, (int)Position.Y, 28, 40), animation.FindFrame(1).SourceRectangle, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+            }
+            else
+            {
+                if (IsMoving) spriteBatch.Draw(texture, new Rectangle((int)Position.X, (int)Position.Y, 28, 40), animation.CurrentFrame.SourceRectangle, Color.White);
+                else spriteBatch.Draw(texture, new Rectangle((int)Position.X, (int)Position.Y, 28, 40), animation.FindFrame(1).SourceRectangle, Color.White);
+            }
+            
         }
         public void Update(GameTime gameTime)
         {

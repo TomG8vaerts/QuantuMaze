@@ -1,16 +1,12 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace QuantuMaze.GameObjects.Enemies
 {
     internal class Stroller : Enemy
     {
 
-        public Stroller(Texture2D texture,Player player) : base(texture,player)
+        public Stroller(Texture2D texture, Player player) : base( texture, player)
         {
         }
     }

@@ -15,7 +15,6 @@ namespace QuantuMaze.GameObjects.Blocks
         public Hitbox Hitbox { get; set; }
         public Texture2D wallTexture { get; set; }
         public Texture2D tileTexture { get; set; }
-        //public Color Color { get; set; } = Color.Transparent;
         public bool Passable { get; set; }
         internal Animation animation;
 
