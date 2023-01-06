@@ -9,18 +9,14 @@ using System.Threading.Tasks;
 
 namespace QuantuMaze.States
 {
-    public abstract class State
+    public interface State
     {
-        protected ContentManager content;
-        protected GraphicsDevice graphics;
-        protected Game1 game;
-        public abstract void Draw(SpriteBatch spriteBatch);
-        public abstract void Update(GameTime gameTime);
-        public State(Game1 game, GraphicsDevice graphics,ContentManager content)
-        {
-            this.game = game;
-            this.graphics = graphics;
-            this.content = content;
-        }
+        public Game1 Game1 { get; set; }
+        public GraphicsDevice Graphics { get; set; }
+        public ContentManager Content { get; set; }
+        public void Draw(SpriteBatch spriteBatch);
+        public void Update(GameTime gameTime);
+        public void QuitGameButton_Click(object sender, EventArgs e);
+        public void StartGameButton_Click(object sender, EventArgs e);
     }
 }

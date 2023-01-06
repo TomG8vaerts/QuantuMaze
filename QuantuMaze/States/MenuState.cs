@@ -18,9 +18,18 @@ namespace QuantuMaze.States
         private Texture2D titleTexture;
         private Texture2D startButtonTexture;
         private Texture2D exitButtonTexture;
-        public MenuState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
+        public Game1 Game1 { get; set; }
+        public GraphicsDevice Graphics { get; set; }
+        public ContentManager Content { get; set; }
+        public MenuState(Game1 game1, GraphicsDevice graphics, ContentManager content)
         {
-            LoadContent(content);
+            Graphics = graphics;
+            Content = content;
+            Game1 = game1;
+            backgroundTexture = Content.Load<Texture2D>("BackGround/Menu");
+            startButtonTexture = Content.Load<Texture2D>("Controls/StartButton");
+            exitButtonTexture = Content.Load<Texture2D>("Controls/ExitButton");
+            titleTexture = Content.Load<Texture2D>("Title/Title");
             var startGameButton = new Button(startButtonTexture)
             {
                 Position = new Vector2(590, 270)
@@ -37,23 +46,14 @@ namespace QuantuMaze.States
             };
         }
 
-        private void LoadContent(ContentManager content)
+        public void StartGameButton_Click(object sender, EventArgs e)
         {
-            backgroundTexture = content.Load<Texture2D>("BackGround/Menu");
-            startButtonTexture = content.Load<Texture2D>("Controls/StartButton");
-            exitButtonTexture = content.Load<Texture2D>("Controls/ExitButton");
-            titleTexture = content.Load<Texture2D>("Title/Title");
         }
-
-        private void StartGameButton_Click(object sender, EventArgs e)
+        public void QuitGameButton_Click(object sender, EventArgs e)
         {
-            game.ChangeState(new GameState(game, graphics, content));
+            Game1.Exit();
         }
-        private void QuitGameButton_Click(object sender, EventArgs e)
-        {
-            game.Exit();
-        }
-        public override void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
             spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
@@ -66,7 +66,7 @@ namespace QuantuMaze.States
             spriteBatch.End();
         }
 
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             foreach (var comp in components)
             {

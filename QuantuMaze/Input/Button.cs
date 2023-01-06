@@ -16,12 +16,9 @@ namespace QuantuMaze.Input
         private MouseState lastMouseState;
         private bool isHovering;
         private Texture2D texture;
-        //private SpriteFont font;
 
         public event EventHandler Click;
         public bool Clicked { get; private set; }
-        //public string Text { get; set; }
-        //public Color PenColor { get; set; }
         public Vector2 Position { get; set; }
         public Rectangle Rectangle
         {
@@ -39,12 +36,6 @@ namespace QuantuMaze.Input
             var color = Color.White;
             if (isHovering) color = Color.Gray;
             spriteBatch.Draw(texture, Rectangle, color);
-            //if (!string.IsNullOrEmpty(Text))
-            //{
-            //var x=(Rectangle.X+(Rectangle.Width/2))-(font.MeasureString(Text).X/2);
-            //var y=(Rectangle.Y+(Rectangle.Height/2))-(font.MeasureString(Text).Y/2);
-            //spriteBatch.DrawString(font, Text, new Vector2(x, y), PenColor);
-            //}
         }
 
         public override void Update(GameTime gameTime)
