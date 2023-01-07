@@ -11,16 +11,20 @@ namespace QuantuMaze.GameObjects
         public Texture2D Texture { get; set; }
         public Hitbox Hitbox { get; set; }
         public Vector2 Position { get; set; }
-        public bool Passable { get; set; }
-        public bool Collected { get; set; }
+        public int Collected { get; set; }
+        //voor Collected, als deze nog niet is verzameld heeft deze waarde 0
+        //als deze wordt verzameld is de waarde 1
+        //zodra geregistreerd is bij de speler dat deze is verzameld wordt de waarde -1
+        //zo zal deze niet elke keer worden opgeteld vergeleken met een boolean
 
 
         public Collectible()
         {
             Hitbox = new Hitbox(new Vector2(Position.X + 15, Position.Y + 15), 50, 50);
             Hitbox.Collidable = true;
-            Passable = true;
-            Collected = false;
+            Hitbox.Passable = true;
+            CollisionManager.AddCollectible(this);
+            Collected = 0;
             animation = new Animation();
             animation.AddFrame(new AnimationFrame(new Rectangle(0, 0, 64, 64)));
             animation.AddFrame(new AnimationFrame(new Rectangle(65, 0, 64, 64)));
@@ -32,16 +36,18 @@ namespace QuantuMaze.GameObjects
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (!Collected)
+            if (Collected==0)
                 spriteBatch.Draw(Texture, Position, animation.CurrentFrame.SourceRectangle, Color.White);
             else spriteBatch.Draw(Texture, Position, Color.Transparent);
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (!Collected)
+            if (Collected==0)
+            {
                 animation.Update(gameTime);
-
+                Hitbox.Update(Position);
+            }
         }
 
     }

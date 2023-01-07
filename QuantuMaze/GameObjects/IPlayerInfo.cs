@@ -12,7 +12,7 @@ namespace QuantuMaze.GameObjects
     {
         public Vector2 Position { get; set; }
         public Hitbox Hitbox { get; set; }
-        public int Health { get; set; }
-        public void TakeDamage();
+        public int CurrentHealth { get; set; }
+        public int NrCollected { get; set; }
     }
 }

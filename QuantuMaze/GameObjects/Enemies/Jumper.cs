@@ -11,7 +11,7 @@ namespace QuantuMaze.GameObjects.Enemies
     internal class Jumper : Enemy
     {
 
-        public Jumper( Texture2D texture,Player player) : base(texture,player)
+        public Jumper( Texture2D texture,IPlayerInfo player) : base(texture,player)
         {
         }
     }

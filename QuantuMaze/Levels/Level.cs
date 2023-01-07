@@ -19,10 +19,12 @@ namespace QuantuMaze.Levels
         private Texture2D wallTexture;
         private Texture2D tileTexture;
         private Texture2D collectibleTexture;
+        private Texture2D rectangleTexture;
         protected Random rng = new Random();
         protected int[,] gameboard;
         protected Enemy[,] enemyBoard;
         protected Collectible[,] orbBoard;
+        private LevelMenu menu;
         //(28,49)
         public List<Block> Blocks { get; set; }
         public List<Collectible> Collectibles { get; set; }
@@ -39,6 +41,7 @@ namespace QuantuMaze.Levels
             strollerTexture = content.Load<Texture2D>("Enemies/Stroller");
             jumperTexture = content.Load<Texture2D>("Enemies/Jumper");
             chaserTexture = content.Load<Texture2D>("Enemies/Chaser");
+            rectangleTexture = content.Load<Texture2D>("Message/Rectangle");
             player = new Player(playerTexture);
             TilesX = 25;
             TilesY = 14;
@@ -46,6 +49,7 @@ namespace QuantuMaze.Levels
             Collectibles = new List<Collectible>();
             Enemies = new List<Enemy>();
             gameboard = new int[TilesY, TilesX];
+            menu = new LevelMenu(rectangleTexture, player);
         }
 
         public void LoadContent()
@@ -76,6 +80,7 @@ namespace QuantuMaze.Levels
                 item.Draw(spriteBatch);
             }
             player.Draw(spriteBatch);
+            menu.Draw(spriteBatch);
         }
         public virtual void Update(GameTime gameTime)
         {
@@ -86,8 +91,14 @@ namespace QuantuMaze.Levels
             foreach (Collectible item in Collectibles)
             {
                 item.Update(gameTime);
+                if (item.Collected == 1)
+                {
+                    player.NrCollected++;
+                    item.Collected = -1;
+                }
             }
             player.Update(gameTime);
+            menu.Update(gameTime,player);
         }
         protected abstract void CreateGrid();
         protected abstract void FillGrid();

@@ -6,7 +6,7 @@ namespace QuantuMaze.GameObjects.Enemies
     internal class Stroller : Enemy
     {
 
-        public Stroller(Texture2D texture, Player player) : base( texture, player)
+        public Stroller(Texture2D texture, IPlayerInfo player) : base( texture, player)
         {
         }
     }

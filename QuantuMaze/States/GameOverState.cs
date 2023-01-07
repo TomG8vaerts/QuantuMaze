@@ -17,6 +17,7 @@ namespace QuantuMaze.States
     {
         private Texture2D gameOverTexture;
         private KeyboardState keyboardState;
+        private KeyboardState lastkeyboardState;
         private Rectangle rectangle;
         private bool tryAgain = false;
         public GameOverState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
@@ -29,6 +30,7 @@ namespace QuantuMaze.States
         {
             if (tryAgain)
             {
+                tryAgain = false;
                 return States.Menu;
             }
             else return States.GameOver;
@@ -43,8 +45,9 @@ namespace QuantuMaze.States
 
         public override void Update(GameTime gameTime)
         {
-            keyboardState=Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.Space))
+            lastkeyboardState = keyboardState;
+            keyboardState = Keyboard.GetState();
+            if (lastkeyboardState.IsKeyDown(Keys.Space) && keyboardState.IsKeyUp(Keys.Space))
             {
                 tryAgain = true;
             }

@@ -128,7 +128,7 @@
 /processorParam:TextureFormat=Color
 /build:GameOver/GameOverScreen.jpg
 
-#begin Message/MessageBox.png
+#begin GameOver/WinScreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -138,7 +138,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Message/MessageBox.png
+/build:GameOver/WinScreen.png
+
+#begin Message/Rectangle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Message/Rectangle.png
 
 #begin Platform/TileHorizontal.png
 /importer:TextureImporter
@@ -151,18 +163,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Platform/TileHorizontal.png
-
-#begin Platform/Tiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Platform/Tiles.png
 
 #begin Platform/WallVertical.png
 /importer:TextureImporter

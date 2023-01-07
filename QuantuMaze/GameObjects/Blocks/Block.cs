@@ -23,6 +23,7 @@ namespace QuantuMaze.GameObjects.Blocks
         {
             Hitbox = new Hitbox(new Vector2(x, y), width, height);
             Hitbox.Collidable = true;
+            Passable = false;
             animation = new Animation();
             //tile 
             animation.AddFrame(new AnimationFrame(new Rectangle(0, 0, 80, 10)));

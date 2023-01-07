@@ -7,6 +7,7 @@ namespace QuantuMaze.Collision
     {
         public Rectangle Rectangle { get; set; }
         public bool Collidable { get; set; }
+        public bool Passable { get; set; } = false;
         public Vector2 Offset { get; set; }
 
         public Hitbox(Vector2 position, int width, int height, int offsetX = 0, int offsetY = 0)

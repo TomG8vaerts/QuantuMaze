@@ -17,11 +17,12 @@ namespace QuantuMaze.GameObjects.Enemies
         protected Animation animation;
         private MovementManager movementManager;
 
-        public Enemy(Texture2D texture,Player player)
+        public Enemy(Texture2D texture,IPlayerInfo player)
         {
             this.texture = texture;
             Speed = new Vector2(1, 0);
             Hitbox = new Hitbox(Position, 28, 40);
+            Hitbox.Passable = false;
             CollisionManager.AddEnemyHitbox(Hitbox);
             animation = new Animation();
             animation.AddFrame(new AnimationFrame(new Rectangle(0, 38, 14, 20)));

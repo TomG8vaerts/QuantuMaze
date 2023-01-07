@@ -91,17 +91,24 @@ namespace QuantuMaze.States
             else if (currentState == States.GameOver)
             {
                 currentState = gameOverState.ChangeState();
-                if (currentState!=States.GameOver)
+                if (currentState != States.GameOver)
                 {
                     CollisionManager.ClearAll();
-                    menuState = new MenuState(game1,graphics,content);
-                    gameState = new GameState(game1,graphics,content);
+                    menuState = new MenuState(game1, graphics, content);
+                    gameState = new GameState(game1, graphics, content);
 
                 }
             }
             else if (currentState == States.Win)
             {
-                currentState = winState.ChangeState();
+                currentState = winState.ChangeState(); 
+                if (currentState != States.Win)
+                {
+                    CollisionManager.ClearAll();
+                    menuState = new MenuState(game1, graphics, content);
+                    gameState = new GameState(game1, graphics, content);
+
+                }
             }
         }
     }
