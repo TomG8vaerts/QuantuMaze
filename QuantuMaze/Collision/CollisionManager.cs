@@ -90,5 +90,10 @@ namespace QuantuMaze.Collision
                 player.TakeDamage();
             }
         }
+        public static void ClearAll()
+        {
+            collisionBoxes.Clear();
+            enemyHitboxes.Clear();
+        }
     }
 }

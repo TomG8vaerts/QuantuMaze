@@ -17,12 +17,21 @@ namespace QuantuMaze.States
     {
         private LevelManager levelManager;
         private Texture2D backgroundTexture;
+        public int GameClear { get; set; }=0;
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
         {
             backgroundTexture = content.Load<Texture2D>("BackGround/Game");
             levelManager = new LevelManager(content);
 
         }
+
+        public override States ChangeState()
+        {
+            if (GameClear==1) return States.Win;
+            else if (GameClear == -1) return States.GameOver;
+            else return States.Game;
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
@@ -34,6 +43,8 @@ namespace QuantuMaze.States
         public override void Update(GameTime gameTime)
         {
             levelManager.Update(gameTime);
+            if (levelManager.GameClear==1) GameClear = 1;
+            if(levelManager.GameClear==-1) GameClear = -1;
         }
     }
 }

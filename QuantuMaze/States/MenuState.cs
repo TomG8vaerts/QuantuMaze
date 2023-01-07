@@ -18,6 +18,7 @@ namespace QuantuMaze.States
         private Texture2D titleTexture;
         private Texture2D startButtonTexture;
         private Texture2D exitButtonTexture;
+        private bool clicked=false;
         public MenuState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
         {
             LoadContent(content);
@@ -47,7 +48,7 @@ namespace QuantuMaze.States
 
         private void StartGameButton_Click(object sender, EventArgs e)
         {
-            game.ChangeState(new GameState(game, graphics, content));
+            clicked = true;
         }
         private void QuitGameButton_Click(object sender, EventArgs e)
         {
@@ -72,6 +73,13 @@ namespace QuantuMaze.States
             {
                 comp.Update(gameTime);
             }
+        }
+
+        public override States ChangeState()
+        {
+            if(clicked)
+            return States.Game;
+            else return States.Menu;
         }
     }
 }

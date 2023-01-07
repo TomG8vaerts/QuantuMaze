@@ -9,8 +9,10 @@ namespace QuantuMaze.Levels
 {
     internal class Level1 : Level
     {
+        private int requiredOrbs;
         public Level1(ContentManager content) : base(content)
         {
+            requiredOrbs = 8;
             enemyBoard = new Enemy[,]
             {
                 {null,null,null,null,null,null,null,null,null,null,new Stroller(strollerTexture,player),null,null,null,null,null,null,null,null,null,null,null,null,null },
@@ -54,6 +56,8 @@ namespace QuantuMaze.Levels
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            if (player.Health <= 0) GameClear = -1;
+            else if (player.NrCollected >= requiredOrbs) GameClear = 1;
         }
 
         protected override void CreateGrid()

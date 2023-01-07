@@ -29,6 +29,7 @@ namespace QuantuMaze.Levels
         public List<Enemy> Enemies { get; set; }
         public int TilesX { get; set; }
         public int TilesY { get; set; }
+        public int GameClear { get; set; }
         public Level(ContentManager content)
         {
             wallTexture = content.Load<Texture2D>("Platform/WallVertical");

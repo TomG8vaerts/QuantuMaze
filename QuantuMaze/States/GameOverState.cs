@@ -17,15 +17,27 @@ namespace QuantuMaze.States
     {
         private Texture2D gameOverTexture;
         private KeyboardState keyboardState;
+        private Rectangle rectangle;
+        private bool tryAgain = false;
         public GameOverState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
         {
-            gameOverTexture = content.Load<Texture2D>("Background/Game");
+            gameOverTexture = content.Load<Texture2D>("GameOver/GameOverScreen");
+            rectangle = new Rectangle(0, 0, 1920, 1080);
+        }
+
+        public override States ChangeState()
+        {
+            if (tryAgain)
+            {
+                return States.Menu;
+            }
+            else return States.GameOver;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(gameOverTexture, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(gameOverTexture, rectangle, Color.White);
             spriteBatch.End();
         }
 
@@ -34,7 +46,7 @@ namespace QuantuMaze.States
             keyboardState=Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Space))
             {
-                game.ChangeState(new MenuState(game, graphics, content));
+                tryAgain = true;
             }
         }
     }

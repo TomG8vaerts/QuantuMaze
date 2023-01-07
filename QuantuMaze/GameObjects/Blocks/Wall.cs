@@ -22,5 +22,6 @@ namespace QuantuMaze.GameObjects.Blocks
         {
             spriteBatch.Draw(wallTexture, Hitbox.Rectangle, animation.FindFrame(1).SourceRectangle,Color.White);
         }
+
     }
 }

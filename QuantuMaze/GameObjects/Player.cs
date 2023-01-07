@@ -21,6 +21,7 @@ namespace QuantuMaze.GameObjects
         public bool IsFacingLeft { get; set; }
         public bool IsMoving { get; set; } = true;
         public int Health { get; set; }
+        public int NrCollected { get; set; }
 
         public Player(Texture2D texture)
         {
@@ -72,7 +73,7 @@ namespace QuantuMaze.GameObjects
 
         public void TakeDamage()
         {
-            Health -= 1;
+            Health--;
             Position = Spawn;
         }
     }
