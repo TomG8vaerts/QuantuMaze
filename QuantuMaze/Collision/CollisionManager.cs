@@ -43,7 +43,7 @@ namespace QuantuMaze.Collision
             {
                 move.Position = nextPos;
             }
-            else if (!CheckCollisions(move.Hitbox.Rectangle, lastPos))
+            else if (!CheckCollisions(move.Hitbox.Rectangle, move.Position))
             {
                 move.Position = new Vector2(nextPos.X, move.Position.Y);
                 if (CheckCollisions(move.Hitbox.Rectangle, move.Position))

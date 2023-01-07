@@ -62,17 +62,17 @@ namespace QuantuMaze.GameObjects
 
         public void Update(GameTime gameTime)
         {
-            TakeDamage(gameTime);
-            FlickerPlayer();
             Move();
             Hitbox.Update(Position);
             animation.Update(gameTime);
+            TakeDamage(gameTime);
+            FlickerPlayer();
         }
 
 
         public void Move()
         {
-            movementManager.Move(this, Position);
+            movementManager.Move(this, Position,this);
         }
 
         public void CollisionBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)

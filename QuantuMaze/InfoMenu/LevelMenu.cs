@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using QuantuMaze.Animate;
 using QuantuMaze.Collision;
 using QuantuMaze.GameObjects;
+using QuantuMaze.InfoMenu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,10 @@ using System.Threading.Tasks;
 
 namespace QuantuMaze.Levels
 {
-    internal class LevelMenu:IPlayerInfo
+    internal class LevelMenu:BottomMenu,IPlayerInfo
     {
-        private Rectangle menu;
         private Rectangle healthBar;
         private Rectangle collectionBar;
-        private Texture2D texture;
         private Animation health;
         private Animation collection;
         public int GameClear { get; set; }
@@ -25,16 +24,15 @@ namespace QuantuMaze.Levels
         public Hitbox Hitbox { get; set; }
         public int CurrentHealth { get; set; }
         public int NrCollected { get; set; }
+        public int OrbTotal { get; set; }
 
-        public LevelMenu(Texture2D texture, IPlayerInfo player)
+        public LevelMenu(Texture2D texture, SpriteFont font, IPlayerInfo player, int orbs):base(texture,font)
         {
-            this.texture = texture;
             CurrentHealth = player.CurrentHealth;
-            Position = player.Position;
             Hitbox = player.Hitbox;
             NrCollected = player.NrCollected;
-            menu = new Rectangle(0, 1040, 1920, 50);
-            healthBar = new Rectangle(30, 1050, 400, 20);
+            OrbTotal=orbs;
+            healthBar = new Rectangle(50, 1050, 400, 20);
             collectionBar = new Rectangle(600,1050,400,20);
             health = new Animation();
             collection = new Animation();
@@ -42,22 +40,22 @@ namespace QuantuMaze.Levels
             collection.AddFrame(new AnimationFrame(new Rectangle(2,2,2,2)));
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, menu, Color.Black);
             spriteBatch.Draw(texture, healthBar, Color.Red);
             spriteBatch.Draw(texture, collectionBar, Color.Blue);
-            spriteBatch.Draw(texture, new Rectangle(30, 1052, CurrentHealth * 80, 16), health.CurrentFrame.SourceRectangle, Color.Red);
-            spriteBatch.Draw(texture, new Rectangle(600, 1052, NrCollected * 50, 16), collection.CurrentFrame.SourceRectangle, Color.Blue);
+            spriteBatch.DrawString(font, "HP:", new Vector2(15, 1050),Color.Red);
+            spriteBatch.DrawString(font, "Orbs:", new Vector2(560, 1050), Color.Blue);
+            spriteBatch.Draw(texture, new Rectangle(50, 1052, CurrentHealth * 80, 16), health.CurrentFrame.SourceRectangle, Color.Red);
+            spriteBatch.Draw(texture, new Rectangle(600, 1052, NrCollected * 400/OrbTotal, 16), collection.CurrentFrame.SourceRectangle, Color.Blue);
+            spriteBatch.DrawString(font,"Use left and right arrow keys to move. Press space to teleport. Collect orbs to advance.",new Vector2(1100,1050),Color.Purple);
         }
 
         public void Update(GameTime gameTime,IPlayerInfo player)
         {
             CurrentHealth=player.CurrentHealth;
             NrCollected = player.NrCollected;
-            health.Update(gameTime);
-            collection.Update(gameTime);
-            
         }
 
     }

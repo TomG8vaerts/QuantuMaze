@@ -47,10 +47,14 @@ namespace QuantuMaze.States
         {
             lastkeyboardState = keyboardState;
             keyboardState = Keyboard.GetState();
-            if (lastkeyboardState.IsKeyDown(Keys.Space) && keyboardState.IsKeyUp(Keys.Space))
+            if (Keyboard.GetState().GetPressedKeys().Length < 1)
             {
-                tryAgain = true;
+                if (lastkeyboardState.IsKeyDown(Keys.Space) && keyboardState.IsKeyUp(Keys.Space))
+                {
+                    tryAgain = true;
+                }
             }
+            
         }
     }
 }

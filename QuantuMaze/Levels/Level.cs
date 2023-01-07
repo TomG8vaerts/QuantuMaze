@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace QuantuMaze.Levels
 {
-    internal abstract class Level
+    internal abstract class Level : LevelContent
     {
         internal Player player;
         private Texture2D playerTexture;
@@ -19,12 +19,13 @@ namespace QuantuMaze.Levels
         private Texture2D wallTexture;
         private Texture2D tileTexture;
         private Texture2D collectibleTexture;
-        private Texture2D rectangleTexture;
+        internal Texture2D rectangleTexture;
+        internal SpriteFont spriteFont;
         protected Random rng = new Random();
         protected int[,] gameboard;
         protected Enemy[,] enemyBoard;
         protected Collectible[,] orbBoard;
-        private LevelMenu menu;
+        protected LevelMenu menu;
         //(28,49)
         public List<Block> Blocks { get; set; }
         public List<Collectible> Collectibles { get; set; }
@@ -32,7 +33,8 @@ namespace QuantuMaze.Levels
         public int TilesX { get; set; }
         public int TilesY { get; set; }
         public int GameClear { get; set; }
-        public Level(ContentManager content)
+        public int OrbTotal { get; set; }
+        public Level(ContentManager content) : base(content)
         {
             wallTexture = content.Load<Texture2D>("Platform/WallVertical");
             tileTexture = content.Load<Texture2D>("Platform/TileHorizontal");
@@ -42,6 +44,7 @@ namespace QuantuMaze.Levels
             jumperTexture = content.Load<Texture2D>("Enemies/Jumper");
             chaserTexture = content.Load<Texture2D>("Enemies/Chaser");
             rectangleTexture = content.Load<Texture2D>("Message/Rectangle");
+            spriteFont = content.Load<SpriteFont>("Fonts/myFont");
             player = new Player(playerTexture);
             TilesX = 25;
             TilesY = 14;
@@ -49,7 +52,6 @@ namespace QuantuMaze.Levels
             Collectibles = new List<Collectible>();
             Enemies = new List<Enemy>();
             gameboard = new int[TilesY, TilesX];
-            menu = new LevelMenu(rectangleTexture, player);
         }
 
         public void LoadContent()
@@ -71,13 +73,13 @@ namespace QuantuMaze.Levels
             {
                 item.Draw(spriteBatch);
             }
-            foreach (Enemy enemy in Enemies)
-            {
-                enemy.Draw(spriteBatch);
-            }
             foreach (Collectible item in Collectibles)
             {
                 item.Draw(spriteBatch);
+            }
+            foreach (Enemy enemy in Enemies)
+            {
+                enemy.Draw(spriteBatch);
             }
             player.Draw(spriteBatch);
             menu.Draw(spriteBatch);
@@ -98,7 +100,7 @@ namespace QuantuMaze.Levels
                 }
             }
             player.Update(gameTime);
-            menu.Update(gameTime,player);
+            menu.Update(gameTime, player);
         }
         protected abstract void CreateGrid();
         protected abstract void FillGrid();

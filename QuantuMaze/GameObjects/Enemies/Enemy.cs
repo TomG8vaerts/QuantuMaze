@@ -16,7 +16,13 @@ namespace QuantuMaze.GameObjects.Enemies
         private Texture2D texture;
         protected Animation animation;
         private MovementManager movementManager;
-
+        public Vector2 Position { get; set; }
+        public Vector2 Speed { get; set; }
+        public Hitbox Hitbox { get; set; }
+        public bool Jumped { get; set; }
+        public IPlayerInfo Player { get; set; }
+        public bool IsFacingLeft { get; set; }
+        public bool IsMoving { get; set; } = true;
         public Enemy(Texture2D texture,IPlayerInfo player)
         {
             this.texture = texture;
@@ -29,19 +35,9 @@ namespace QuantuMaze.GameObjects.Enemies
             animation.AddFrame(new AnimationFrame(new Rectangle(23, 39, 14, 20)));
             animation.AddFrame(new AnimationFrame(new Rectangle(44, 39, 14, 20)));
             animation.AddFrame(new AnimationFrame(new Rectangle(23, 39, 14, 20)));
-
-
             movementManager = new MovementManager();
             Player=player;
         }
-
-        public Vector2 Position { get; set; }
-        public Vector2 Speed { get; set; }
-        public Hitbox Hitbox { get; set; }
-        public bool Jumped { get; set; }
-        public IPlayerInfo Player { get; set; }
-        public bool IsFacingLeft { get; set; }
-        public bool IsMoving { get; set; } = true;
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -59,13 +55,13 @@ namespace QuantuMaze.GameObjects.Enemies
         }
         public void Update(GameTime gameTime)
         {
-            Move();
             animation.Update(gameTime);
             Hitbox.Update(Position);
+            Move();
         }
         public void Move()
         {
-            movementManager.Move(this, Position);
+            movementManager.Move(this, Position,Player);
         }
 
         public void CollisionBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)

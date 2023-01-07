@@ -9,10 +9,10 @@ namespace QuantuMaze.Levels
 {
     internal class Level1 : Level
     {
-        private int requiredOrbs;
         public Level1(ContentManager content) : base(content)
         {
-            requiredOrbs = 8;
+            OrbTotal = 8;
+            menu = new LevelMenu(rectangleTexture, spriteFont, player,OrbTotal);
             enemyBoard = new Enemy[,]
             {
                 {null,null,null,null,null,null,null,null,null,null,new Stroller(strollerTexture,player),null,null,null,null,null,null,null,null,null,null,null,null,null },
@@ -31,12 +31,12 @@ namespace QuantuMaze.Levels
             };
             orbBoard = new Collectible[,]
             {
-                {new Collectible(),null,null,null,null,null,null,null,null,null,null,null,null,null,null,new Collectible(),null,null,null,null,null,null,null,null },
                 {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null },
+                {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,new Collectible(),null,null },
                 {null,null,null,null,null,null,null,null,null,null,null,null,new Collectible(),null,null,null,null,null,null,null,null,null,null,null },
                 {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null },
                 {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,new Collectible(),null,null,null,null,null,null },
-                {null,null,null,new Collectible(),null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null },
+                {null,null,null,new Collectible(),null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,new Collectible(),null },
                 {null,null,null,null,null,null,null,new Collectible(),null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null },
                 {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null },
                 {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,new Collectible(),null,null,null,null },
@@ -49,6 +49,7 @@ namespace QuantuMaze.Levels
             CreateGrid();
             LoadContent();
         }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
@@ -57,7 +58,7 @@ namespace QuantuMaze.Levels
         {
             base.Update(gameTime);
             if (player.Health <= 0) GameClear = -1;
-            else if (player.NrCollected >= requiredOrbs) GameClear = 1;
+            else if (player.NrCollected >= OrbTotal) GameClear=1;
         }
 
         protected override void CreateGrid()
@@ -101,7 +102,7 @@ namespace QuantuMaze.Levels
                     gameboard[l, k] = rng.Next(0, 3);
                     if (l == 0)
                     {
-                        if (l == TilesY)
+                        if (k == 0)
                         {
                             gameboard[l, k] = 3;
                         }
@@ -132,7 +133,7 @@ namespace QuantuMaze.Levels
                     }
                 }
             }
-
+            gameboard[TilesY-2, 0] = 5;
         }
 
     }

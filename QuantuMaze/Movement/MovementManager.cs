@@ -15,8 +15,9 @@ namespace QuantuMaze.Movement
         int h = 1080;
         private Vector2 lastPosition = Vector2.Zero;
         private Vector2 playerPos = Vector2.Zero;
-        public void Move(IMovable move, Vector2 firstPosition)
+        public void Move(IMovable move, Vector2 firstPosition, IPlayerInfo player)
         {
+            playerPos=player.Position;
             lastPosition = firstPosition;
             var direction = input.ReadInput();
             var distance = direction * move.Speed;
@@ -36,7 +37,7 @@ namespace QuantuMaze.Movement
 
         private Vector2 KeyboardInput(IMovable move, Vector2 direction, Vector2 distance, Vector2 nextPos)
         {
-            if (direction.X == 0 && move is Player) move.IsMoving = false;
+            if (direction.X == 0&&move is Player) move.IsMoving = false;
             else move.IsMoving = true;
             if ((direction.Y < 0) && !move.Jumped) nextPos = Jump(move, nextPos);
             if (distance.X < 0) move.IsFacingLeft = true;
@@ -50,15 +51,15 @@ namespace QuantuMaze.Movement
             {
                 move.Jumped = true;
                 nextPos = nextPos - jumpForce - gravity;
-                if ((move is Jumper ||move is Player)&& nextPos.Y < 0)
+                if ( nextPos.Y < 0)
                 {
                     nextPos = new Vector2(lastPosition.X, h - jumpForce.Y+move.Position.Y-40);
                 }
             }
-            else if (move is Chaser&&playerPos!=Vector2.Zero)
+            else if (move is Chaser)
             {
                 move.Jumped = true;
-                nextPos=playerPos-gravity;
+                move.Position=playerPos - gravity;
             }
 
             return nextPos;

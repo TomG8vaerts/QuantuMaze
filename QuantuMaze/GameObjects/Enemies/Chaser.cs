@@ -14,7 +14,8 @@ namespace QuantuMaze.GameObjects.Enemies
         public Chaser(Texture2D texture,IPlayerInfo player) : base(texture,player)
         {
             animation = new Animation();
-            animation.AddFrame(new AnimationFrame(new Rectangle(23, 40, 14, 20)));
+            animation.AddFrame(new AnimationFrame(new Rectangle(23, 38, 14, 20)));
+            animation.AddFrame(new AnimationFrame(new Rectangle(23, 38, 14, 20)));
         }
     }
 }

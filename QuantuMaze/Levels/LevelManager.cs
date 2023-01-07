@@ -12,12 +12,12 @@ using QuantuMaze.GameObjects;
 
 namespace QuantuMaze.Levels
 {
-    internal class LevelManager
+    internal class LevelManager:LevelContent
     {
         private Level currentLevel;
         private Level nextLevel;
         public int GameClear { get; set; }=0;
-        public LevelManager(ContentManager content)
+        public LevelManager(ContentManager content):base(content)
         {
             currentLevel = new Level1(content);
         }
@@ -29,7 +29,10 @@ namespace QuantuMaze.Levels
                 nextLevel = null;
             }
             currentLevel.Update(gameTime);
-            if (currentLevel.GameClear == 1) GameClear = 1;
+            if (currentLevel.GameClear == 1)
+                if (currentLevel is Level1)
+                    ChangeLevel(new Level2(content));
+                else currentLevel.GameClear = 1;
             if(currentLevel.GameClear == -1) GameClear = -1;
         }
         public void Draw(SpriteBatch spriteBatch)
