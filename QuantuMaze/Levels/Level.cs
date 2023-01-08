@@ -11,7 +11,7 @@ namespace QuantuMaze.Levels
 {
     internal abstract class Level : LevelContent
     {
-        private Player player;
+        internal Player player;
         private Texture2D playerTexture;
         internal Texture2D strollerTexture;
         internal Texture2D jumperTexture;
