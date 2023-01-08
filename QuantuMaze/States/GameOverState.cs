@@ -1,14 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using QuantuMaze.GameObjects.Enemies;
-using QuantuMaze.GameObjects;
-using QuantuMaze.Levels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using QuantuMaze.InfoMenu;
 

@@ -1,15 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using QuantuMaze.GameObjects.Enemies;
-using QuantuMaze.GameObjects;
 using QuantuMaze.Levels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection.Metadata;
 
 namespace QuantuMaze.States
 {
@@ -22,7 +14,6 @@ namespace QuantuMaze.States
         {
             backgroundTexture = content.Load<Texture2D>("BackGround/Game");
             levelManager = new LevelManager(content);
-
         }
 
         public override States ChangeState()

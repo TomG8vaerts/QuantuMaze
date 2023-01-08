@@ -5,11 +5,6 @@ using QuantuMaze.Animate;
 using QuantuMaze.Collision;
 using QuantuMaze.GameObjects;
 using QuantuMaze.InfoMenu;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuantuMaze.Levels
 {
@@ -19,9 +14,8 @@ namespace QuantuMaze.Levels
         private Rectangle collectionBar;
         private Animation health;
         private Animation collection;
-        public int GameClear { get; set; }
-        public Vector2 Position { get; set; }
         public Hitbox Hitbox { get; set; }
+        public int GameClear { get; set; }
         public int CurrentHealth { get; set; }
         public int NrCollected { get; set; }
         public int OrbTotal { get; set; }
@@ -29,7 +23,6 @@ namespace QuantuMaze.Levels
         public LevelMenu(Texture2D texture, SpriteFont font, IPlayerInfo player, int orbs):base(texture,font)
         {
             CurrentHealth = player.CurrentHealth;
-            Hitbox = player.Hitbox;
             NrCollected = player.NrCollected;
             OrbTotal=orbs;
             menu = new Rectangle(0, 1040, 1920, 50);

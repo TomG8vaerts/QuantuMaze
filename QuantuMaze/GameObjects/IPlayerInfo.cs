@@ -10,7 +10,6 @@ namespace QuantuMaze.GameObjects
 {
     internal interface IPlayerInfo
     {
-        public Vector2 Position { get; set; }
         public Hitbox Hitbox { get; set; }
         public int CurrentHealth { get; set; }
         public int NrCollected { get; set; }

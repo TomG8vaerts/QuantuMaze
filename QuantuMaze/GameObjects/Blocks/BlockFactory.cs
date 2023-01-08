@@ -20,13 +20,13 @@
             }
             if (type == 3)
             {
-                newBlock= new LeftWallTile(x, y);
+                newBlock = new LeftWallTile(x, y);
             }
-            if (type==4)
+            if (type == 4)
             {
                 newBlock = new RightWallTile(x, y);
             }
-            if (type==5)
+            if (type == 5)
             {
                 newBlock = new DoubleWallTile(x, y);
             }

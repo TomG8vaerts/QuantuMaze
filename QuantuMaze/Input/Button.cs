@@ -18,7 +18,6 @@ namespace QuantuMaze.Input
         private Texture2D texture;
 
         public event EventHandler Click;
-        public bool Clicked { get; private set; }
         public Vector2 Position { get; set; }
         public Rectangle Rectangle
         {

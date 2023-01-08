@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using QuantuMaze.GameObjects;
-using QuantuMaze.GameObjects.Enemies;
-using QuantuMaze.Levels;
 using QuantuMaze.States;
 
 namespace QuantuMaze

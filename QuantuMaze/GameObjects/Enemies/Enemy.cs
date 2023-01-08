@@ -3,11 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using QuantuMaze.Animate;
 using QuantuMaze.Collision;
 using QuantuMaze.Movement;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuantuMaze.GameObjects.Enemies
 {
@@ -26,7 +21,7 @@ namespace QuantuMaze.GameObjects.Enemies
         public Enemy(Texture2D texture,IPlayerInfo player)
         {
             this.texture = texture;
-            Speed = new Vector2(1, 0);
+            Player = player;
             Hitbox = new Hitbox(Position, 28, 40);
             Hitbox.Passable = false;
             CollisionManager.AddEnemyHitbox(Hitbox);
@@ -35,8 +30,7 @@ namespace QuantuMaze.GameObjects.Enemies
             animation.AddFrame(new AnimationFrame(new Rectangle(23, 39, 14, 20)));
             animation.AddFrame(new AnimationFrame(new Rectangle(44, 39, 14, 20)));
             animation.AddFrame(new AnimationFrame(new Rectangle(23, 39, 14, 20)));
-            movementManager = new MovementManager();
-            Player=player;
+            movementManager = new MovementManager(true);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -61,13 +55,18 @@ namespace QuantuMaze.GameObjects.Enemies
         }
         public void Move()
         {
-            movementManager.Move(this, Position,Player);
+            movementManager.Move(this, Position);
         }
 
-        public void CollisionBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)
+        public virtual void CollisionBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)
         {
-            CollisionManager.EnemyBehavior(move, nextPos, lastPos,Player);
-
+            CollisionManager.StandardBehavior(move, nextPos, lastPos);
+            if (CollisionManager.CheckPlayerCollision(Player))
+            {
+                Player.CurrentHealth--;
+            }
         }
+
+        public abstract Vector2 Jump(IMovable move, Vector2 nextPos);
     }
 }

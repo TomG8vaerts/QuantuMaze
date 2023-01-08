@@ -26,7 +26,7 @@ namespace QuantuMaze.Levels
                 {null,null,new Stroller(strollerTexture,player),null,null,null,null,null,null,null,new Stroller(strollerTexture,player),null,null,null,null,null,null,null,null,null,null,null,null,new Stroller(strollerTexture,player) },
                 {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null },
                 {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,new Jumper(jumperTexture,player),null,null },
-                {new Stroller(strollerTexture,player),null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,new Stroller(strollerTexture,player),null,null,null,null,null,null,null },
+                {new Stroller(strollerTexture,player),null,null,null,null,null,null,new Chaser(chaserTexture,player),null,null,null,null,null,null,null,null,new Stroller(strollerTexture,player),null,null,null,null,null,null,null },
                 {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null },
                 {null,null,null,null,null,new Stroller(strollerTexture,player),null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,new Jumper(jumperTexture,player),null },
                 {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,new Jumper(jumperTexture,player),null,null,null,null,null,null },

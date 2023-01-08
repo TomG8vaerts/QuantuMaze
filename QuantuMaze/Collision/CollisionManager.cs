@@ -37,7 +37,7 @@ namespace QuantuMaze.Collision
             return false;
 
         }
-        private static void StandardBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)
+        public static void StandardBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)
         {
             if (!CheckCollisions(move.Hitbox.Rectangle, nextPos))
             {
@@ -55,15 +55,10 @@ namespace QuantuMaze.Collision
                     }
                 }
             }
-        }
-        public static void PlayerBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos)
-        {
-            StandardBehavior(move, nextPos, lastPos);
-            CollectibleCheck(move);
             GroundCheck(move, lastPos);
         }
 
-        private static void CollectibleCheck(IMovable move)
+        public static void CollectibleCheck(IMovable move)
         {
             var currentRectangle = new Rectangle((int)move.Position.X, (int)move.Position.Y, move.Hitbox.Rectangle.Width, move.Hitbox.Rectangle.Height);
             foreach (Collectible orb in collectibles)
@@ -75,7 +70,7 @@ namespace QuantuMaze.Collision
             }
         }
 
-        private static bool CheckPlayerCollision(IMovable move, IPlayerInfo player)
+        public static bool CheckPlayerCollision(IPlayerInfo player)
         {
             foreach (Hitbox box in enemyHitboxes)
             {
@@ -84,7 +79,7 @@ namespace QuantuMaze.Collision
             return false;
         }
 
-        private static void GroundCheck(IMovable move, Vector2 lastPos)
+        public static void GroundCheck(IMovable move, Vector2 lastPos)
         {
             if (lastPos.Y == move.Position.Y && move.Jumped == true)
             {
@@ -92,22 +87,6 @@ namespace QuantuMaze.Collision
             }
         }
 
-        public static void EnemyBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos, IPlayerInfo player)
-        {
-            StandardBehavior(move, nextPos, lastPos);
-            GroundCheck(move, lastPos);
-            if (CheckCollisions(move.Hitbox.Rectangle, new Vector2(nextPos.X, move.Position.Y)))
-            {
-                if (move is Stroller || move is Jumper)
-                {
-                    move.Speed *= -1;
-                }
-            }
-            if (CheckPlayerCollision(move, player))
-            {
-                player.CurrentHealth--;
-            }
-        }
         public static void ClearAll()
         {
             collisionBoxes.Clear();

@@ -11,7 +11,7 @@ namespace QuantuMaze.Levels
 {
     internal abstract class Level : LevelContent
     {
-        internal Player player;
+        private Player player;
         private Texture2D playerTexture;
         internal Texture2D strollerTexture;
         internal Texture2D jumperTexture;
@@ -21,11 +21,11 @@ namespace QuantuMaze.Levels
         private Texture2D collectibleTexture;
         internal Texture2D rectangleTexture;
         internal SpriteFont spriteFont;
-        protected Random rng = new Random();
-        protected int[,] gameboard;
-        protected Enemy[,] enemyBoard;
-        protected Collectible[,] orbBoard;
-        protected LevelMenu menu;
+        internal Random rng = new Random();
+        internal int[,] gameboard;
+        internal Enemy[,] enemyBoard;
+        internal Collectible[,] orbBoard;
+        internal LevelMenu menu;
         //(28,49)
         public List<Block> Blocks { get; set; }
         public List<Collectible> Collectibles { get; set; }

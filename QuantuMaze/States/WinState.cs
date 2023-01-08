@@ -3,11 +3,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using QuantuMaze.InfoMenu;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuantuMaze.States
 {
@@ -29,7 +24,6 @@ namespace QuantuMaze.States
             rectangle = new Rectangle(0, 0, 1920, 1080);
             stateMenu = new StateMenu(menuTexture, menuFont);
         }
-
 
         public override States ChangeState()
         {

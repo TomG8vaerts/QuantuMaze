@@ -18,6 +18,7 @@ namespace QuantuMaze.Movement
         public bool IsFacingLeft { get; set; }
         public bool IsMoving { get; set; }
         public void Move();
+        public Vector2 Jump(IMovable move, Vector2 nextPos);
         public void CollisionBehavior(IMovable move, Vector2 nextPos, Vector2 lastPos);
     }
 }

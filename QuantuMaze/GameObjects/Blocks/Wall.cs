@@ -16,7 +16,6 @@ namespace QuantuMaze.GameObjects.Blocks
         {
             Passable = false;
             Hitbox.Collidable = true;
-
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
