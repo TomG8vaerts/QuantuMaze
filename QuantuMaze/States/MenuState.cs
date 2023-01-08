@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Media;
 
 namespace QuantuMaze.States
 {
@@ -18,10 +19,13 @@ namespace QuantuMaze.States
         private Texture2D titleTexture;
         private Texture2D startButtonTexture;
         private Texture2D exitButtonTexture;
+        private Song song;
         private bool clicked=false;
         public MenuState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
         {
             LoadContent(content);
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
             var startGameButton = new Button(startButtonTexture)
             {
                 Position = new Vector2(590, 270)
@@ -44,6 +48,7 @@ namespace QuantuMaze.States
             startButtonTexture = content.Load<Texture2D>("Controls/StartButton");
             exitButtonTexture = content.Load<Texture2D>("Controls/ExitButton");
             titleTexture = content.Load<Texture2D>("Title/Title");
+            song = content.Load<Song>("Music/MainMusic");
         }
 
         private void StartGameButton_Click(object sender, EventArgs e)

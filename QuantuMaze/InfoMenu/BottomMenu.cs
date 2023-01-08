@@ -18,7 +18,6 @@ namespace QuantuMaze.InfoMenu
         {
             this.font = font;
             this.texture = texture;
-            menu = new Rectangle(0, 1040, 1920, 50);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

@@ -32,6 +32,7 @@ namespace QuantuMaze.Levels
             Hitbox = player.Hitbox;
             NrCollected = player.NrCollected;
             OrbTotal=orbs;
+            menu = new Rectangle(0, 1040, 1920, 50);
             healthBar = new Rectangle(50, 1050, 400, 20);
             collectionBar = new Rectangle(600,1050,400,20);
             health = new Animation();

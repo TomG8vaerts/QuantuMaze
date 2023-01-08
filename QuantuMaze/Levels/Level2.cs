@@ -10,12 +10,12 @@ using System.Text;
 using System.Threading.Tasks;
 using QuantuMaze.Collision;
 using QuantuMaze.GameObjects.Blocks;
+using Microsoft.Xna.Framework.Media;
 
 namespace QuantuMaze.Levels
 {
     internal class Level2 : Level
     {
-        private int requiredOrbs;
         public Level2(ContentManager content) : base(content)
         {
             CollisionManager.ClearAll();
@@ -142,7 +142,7 @@ namespace QuantuMaze.Levels
         {
             base.Update(gameTime);
             if (player.Health <= 0) GameClear = -1;
-            else if (player.NrCollected >= requiredOrbs) GameClear = 1;
+            else if (player.NrCollected >= OrbTotal) GameClear = 1;
         }
     }
 }

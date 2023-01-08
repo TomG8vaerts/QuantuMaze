@@ -56,9 +56,6 @@ namespace QuantuMaze
             StateManager.Draw(_spriteBatch);
             base.Draw(gameTime);
         }
-        public void ChangeState()
-        {
-            StateManager.ChangeState();
-        }
+
     }
 }

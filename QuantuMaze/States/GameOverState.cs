@@ -10,20 +10,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using QuantuMaze.InfoMenu;
 
 namespace QuantuMaze.States
 {
     internal class GameOverState : State
     {
         private Texture2D gameOverTexture;
+        private Texture2D menuTexture;
+        private SpriteFont menuFont;
         private KeyboardState keyboardState;
         private KeyboardState lastkeyboardState;
         private Rectangle rectangle;
         private bool tryAgain = false;
+        private StateMenu stateMenu;
         public GameOverState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
         {
             gameOverTexture = content.Load<Texture2D>("GameOver/GameOverScreen");
+            menuTexture = content.Load<Texture2D>("Message/Rectangle");
+            menuFont = content.Load<SpriteFont>("Fonts/myFont");
             rectangle = new Rectangle(0, 0, 1920, 1080);
+            stateMenu = new StateMenu(menuTexture, menuFont);
         }
 
         public override States ChangeState()
@@ -40,6 +47,7 @@ namespace QuantuMaze.States
         {
             spriteBatch.Begin();
             spriteBatch.Draw(gameOverTexture, rectangle, Color.White);
+            stateMenu.Draw(spriteBatch);
             spriteBatch.End();
         }
 
@@ -47,9 +55,9 @@ namespace QuantuMaze.States
         {
             lastkeyboardState = keyboardState;
             keyboardState = Keyboard.GetState();
-            if (Keyboard.GetState().GetPressedKeys().Length < 1)
+            if (keyboardState.GetPressedKeys().Length < 1)
             {
-                if (lastkeyboardState.IsKeyDown(Keys.Space) && keyboardState.IsKeyUp(Keys.Space))
+                if (lastkeyboardState.IsKeyDown(Keys.Enter) && keyboardState.IsKeyUp(Keys.Enter))
                 {
                     tryAgain = true;
                 }

@@ -32,7 +32,7 @@ namespace QuantuMaze.Levels
             if (currentLevel.GameClear == 1)
                 if (currentLevel is Level1)
                     ChangeLevel(new Level2(content));
-                else currentLevel.GameClear = 1;
+                else this.GameClear = 1;
             if(currentLevel.GameClear == -1) GameClear = -1;
         }
         public void Draw(SpriteBatch spriteBatch)
